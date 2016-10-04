@@ -51,7 +51,8 @@
 # Cordova or browser. If cordova, use the file transfer plugin to upload the file
 # ops.fileURI
 # Filesystem URL representing the file on the device or a data URI. For backwards compatibility, this can also be the full path of the file on the device.
-
+# ops.acceleration
+# http://docs.aws.amazon.com/AmazonS3/latest/dev/transfer-acceleration.html
 
     _.defaults ops,
       expiration: 1800000
@@ -60,6 +61,7 @@
       uploader: "default"
       unique_name: true
       platform: 'browser'
+      acceleration: false
 
     if ops.file
       uploadFile(ops.file, ops, callback)
@@ -141,6 +143,7 @@ uploadFile = (file, ops, callback) ->
     acl: ops.acl
     bucket: ops.bucket
     expiration: ops.expiration
+    acceleration: ops.acceleration
     (error, result) ->
       if result
         # Mark as signed

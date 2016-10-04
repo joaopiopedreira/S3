@@ -15,6 +15,7 @@ Meteor.methods
 			bucket:S3.config.bucket
 			acl:"public-read"
 			region:S3.config.region
+			acceleration:false
 
 		check ops,
 			expiration:Number
@@ -59,10 +60,13 @@ Meteor.methods
 		signature = calculate_signature policy, ops.region
 
 		# Identify post_url
-		if ops.region is "us-east-1" or ops.region is "us-standard"
-			post_url = "https://s3.amazonaws.com/#{ops.bucket}"
+		if ops.acceleration
+				post_url = "https://#{ops.bucket}.s3-accelerate.amazonaws.com"
 		else
-			post_url = "https://s3-#{ops.region}.amazonaws.com/#{ops.bucket}"
+			if ops.region is "us-east-1" or ops.region is "us-standard"
+				post_url = "https://s3.amazonaws.com/#{ops.bucket}"
+			else
+				post_url = "https://s3-#{ops.region}.amazonaws.com/#{ops.bucket}"
 
 		# Return results
 		policy:policy
