@@ -80,6 +80,7 @@ Meteor.methods
 		meta_uuid:meta_uuid
 		meta_date:meta_date
 		meta_credential:meta_credential
+		file_size:ops.file_size
 
 
 # crypto = Npm.require("crypto")
