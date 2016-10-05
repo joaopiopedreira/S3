@@ -26,6 +26,7 @@ Meteor.methods
 			file_type:String
 			file_name:String
 			file_size:Number
+			acceleration:Boolean
 
 		expiration = new Date Date.now() + ops.expiration
 		expiration = expiration.toISOString()
