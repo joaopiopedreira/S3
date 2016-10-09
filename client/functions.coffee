@@ -207,6 +207,7 @@ uploadFile = (file, ops, callback) ->
                   url: result.url
                   secure_url: result.secure_url
                   relative_url: result.relative_url
+                  fileSize: result.file_size
 
               callback and callback null, S3.collection.findOne id
             else
